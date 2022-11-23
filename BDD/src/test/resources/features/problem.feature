@@ -13,4 +13,5 @@ Feature: Problem
     Examples:
       | a | b | result |
       | 4     | 1     | 2     |
-      | 36    | 4      | 3      |
+      | 36    | 4     | 3     |
+      | -36   | -1    | 6     |
