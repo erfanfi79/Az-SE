@@ -1,4 +1,7 @@
+package calculator;
+
 import calculator.Calculator;
+import cucumber.api.PendingException;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -12,24 +15,26 @@ public class MyStepdefs {
     private int result;
 
     @Before
-    public void before() {
+    public void before() throws Throwable {
         calculator = new Calculator();
     }
 
-    @Given("^Two input values, (\\d+) and (\\d+)$")
-    public void twoInputValuesAnd(int arg0, int arg1) {
+    @Given("^Two input values, (-?\\d+) and (-?\\d+)$")
+    public void twoInputValuesAnd(int arg0, int arg1) throws Throwable {
         value1 = arg0;
         value2 = arg1;
     }
 
     @When("^I add the two values$")
-    public void iAddTheTwoValues() {
+    public void iAddTheTwoValues() throws Throwable {
         result = calculator.add(value1, value2);
         System.out.print(result);
     }
 
-    @Then("^I expect the result (\\d+)$")
-    public void iExpectTheResult(int arg0) {
+    @Then("^I expect the result (-?\\d+)$")
+    public void iExpectTheResult(int arg0) throws Throwable {
         Assert.assertEquals(arg0, result);
     }
+
+
 }
