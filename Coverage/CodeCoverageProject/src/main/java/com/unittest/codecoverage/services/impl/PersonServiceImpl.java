@@ -1,6 +1,7 @@
 package com.unittest.codecoverage.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import com.unittest.codecoverage.exceptions.PersonException;
@@ -13,12 +14,14 @@ import com.unittest.codecoverage.services.PersonService;
 public class PersonServiceImpl implements PersonService {
 	
 	private PersonValidator validator;
+
 	@Autowired
 	private PersonRepository repository;
 	
 	@Autowired
 	public PersonServiceImpl() {
 		this.validator = new PersonValidator();
+		this.repository = new PersonRepository();
 	}
 
 	@Override
@@ -35,7 +38,7 @@ public class PersonServiceImpl implements PersonService {
 
 	@Override
 	public Person get(String name) {
-		if(validator.requiredName(name)) {
+		if(!validator.requiredName(name)) {
 			throw new PersonException("Name is required"); 
 		}
 		return repository.get(name);
@@ -43,7 +46,7 @@ public class PersonServiceImpl implements PersonService {
 
 	@Override
 	public void delete(String name) {
-		if(validator.requiredName(name)) {
+		if(!validator.requiredName(name)) {
 			throw new PersonException("Name is required"); 
 		}
 		repository.delete(name);
